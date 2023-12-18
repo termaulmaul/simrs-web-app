@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pasien - Sistem Manajemen Rumah Sakit</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Define a CSS animation for fade-in */
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Apply the animation to elements with the "animated" class */
+        .animated {
+            animation: fade-in 1s ease-out;
+        }
+
+         /* Styling for the header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #3182ce;
+            color: #fff;
+            z-index: 999;
+            padding: 1rem;
+        }
+
+        /* Styling for the footer */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            animation: fade-in 1s ease-out;
+        }
+    </style>
+</head>
+
+    <!-- Header Section -->
+    <body class="bg-gray-100" style="position: relative; min-height: 100vh;">
+        <div class="header">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-2xl font-semibold">SIMRS - RSUD IKN</h1>
+                <div class="space-x-4">
+                    <a href="/" class="hover:underline animated">Home</a>
+                    <a href="/pasien" class="hover:underline animated">Pasien</a>
+                    <a href="/jadwal-dokter" class="hover:underline animated">Jadwal Dokter</a>
+                    <!-- Tambahkan tombol login di sini -->
+                    <button class="hover:underline" onclick="toggleLoginPopup()">Login</button>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal (Popup) untuk Login -->
+    <div id="loginPopup" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 animated">
+        <div class="bg-white p-6 rounded-lg">
+            <h2 class="text-2xl font-semibold mb-4">Login</h2>
+            <!-- Form login -->
+            <form>
+                <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" class="block w-full p-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="block w-full p-2 border rounded">
+                </div>
+                <div class="flex justify-between">
+                    <button class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600" onclick="login()">Login</button>
+                    <button class="bg-gray-200 p-2 rounded hover:bg-gray-300" onclick="closeLoginPopup()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Content Section -->
+    <div class="container mx-auto py-16 h-full overflow-y-auto">
+        <h1 class="text-4xl font-semibold mb-6 animated">Pasien</h1>
+        <!-- Tabel Daftar Pasien -->
+        <div class="bg-white shadow-md p-6 rounded-lg mt-6 animated">
+            <h2 class="text-xl font-semibold mb-4">Daftar Pasien</h2>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Nama
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Umur
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Jenis Kelamin
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Diagnosa
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- Pasien 1 -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            John Doe
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            35
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            Laki-laki
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            Flu
+                        </td>
+                    </tr>
+                    <!-- Pasien 2 -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            Jane Smith
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            28
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            Perempuan
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            Patah tulang
+                        </td>
+                    </tr>
+                    <!-- Tambahkan data pasien lainnya di sini -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Informasi tambahan tentang Pasien -->
+        <div class="bg-white shadow-md p-6 rounded-lg mt-6 animated">
+            <h2 class="text-xl font-semibold mb-4">Pendaftaran Pasien Baru</h2>
+            <p class="text-gray-700">Memungkinkan petugas administrasi untuk mendaftarkan pasien baru ke dalam sistem.</p>
+        </div>
+
+        <div class="bg-white shadow-md p-6 rounded-lg mt-6 animated">
+            <h2 class="text-xl font-semibold mb-4">Rekam Medis</h2>
+            <p class="text-gray-700">Mengelola dan mengakses rekam medis pasien, termasuk riwayat penyakit, diagnosis, dan perawatan yang telah diberikan.</p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        &copy; 2023 SIMRS - RSUD IKN. All rights reserved.
+    </div>
+</body>
+
+</html>
